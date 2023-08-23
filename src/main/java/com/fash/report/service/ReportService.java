@@ -28,7 +28,6 @@ public class ReportService {
 	public void generaReporte(File file) throws JRException, FileNotFoundException {
 		ArchivoTramite archivo = new ArchivoTramite();
 		Constancia constancia = new Constancia();
-
 		Map<String, Object> params = new HashMap<>();
 		List<Constancia> datos = new ArrayList<>();
 

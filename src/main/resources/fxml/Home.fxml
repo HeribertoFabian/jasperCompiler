@@ -61,8 +61,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-               </children>
-               
+               </children>               
             </HBox>
             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="200.0">
                <children>

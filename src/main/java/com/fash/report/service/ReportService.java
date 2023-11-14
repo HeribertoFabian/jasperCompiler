@@ -34,25 +34,31 @@ public class ReportService {
 		DatosTipoConstancia datosTipoConstancia = new DatosTipoConstancia();
 
 		constancia = generaDatosConstancia(constancia);
+		datos.add(constancia);
 
 		datosTipoConstancia = getDatosTipoConstancia();
 
 		Date fecha = new Date();
 		archivo.setArtCud("ART CUD");
 		archivo.setDorsSolicitada("DORS SOLICITADA");
+//		archivo.set
 		System.out.println(System.getProperty("user.dir"));
 
 //    	File file = ResourceUtils.getFile("classpath:reportes/Constancia_Autorizacion_DoRS.jrxml");
 		JasperReport jasperReport = (JasperReport) JasperCompileManager.compileReport(file.getAbsolutePath());
 
-		JasperCompileManager.compileReportToFile(file.getAbsolutePath(),
-				System.getProperty("user.dir") + File.separator + "ejemplo.jasper");
+//		JasperCompileManager.compileReportToFile(file.getAbsolutePath(),
+//				System.getProperty("user.dir") + File.separator + "ejemplo.jasper");
 
-		InputStream plantilla = getClass().getResourceAsStream("/reportes/Constancia_Autorizacion_DoRS.jasper");
+//		InputStream plantilla = getClass().getResourceAsStream("/reportes/Constancia_Autorizacion_DoRS.jasper");
 
 		params.put("IS_IGNORE_PAGINATION", Boolean.FALSE);
-		params.put("IMG_HEADER", this.getClass().getResource(RUTA_IMAGENES + "header.jpg"));
-		params.put("IMG_FOOTER", this.getClass().getResource(RUTA_IMAGENES + "footer.jpg"));
+		params.put("IMG_HEADER", this.getClass().getResource(RUTA_IMAGENES + "header.jpg").toString());
+		params.put("IMG_FOOTER", this.getClass().getResource(RUTA_IMAGENES + "footer.jpg").toString());
+		params.put("CONDICION", "ESTA ES LA CONDICION");
+		params.put("ADVERTENCIA", "Esta es la advertencia");
+		
+		System.out.println(params.toString());
 
 //    	JasperReport reporte =(JasperReport) JRLoader.loadObject(plantilla);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
@@ -65,8 +71,10 @@ public class ReportService {
 	}
 
 	private DatosTipoConstancia getDatosTipoConstancia() {
-		// TODO Auto-generated method stub
-		return null;
+		DatosTipoConstancia dtc = new DatosTipoConstancia();
+		dtc.setNomenclatura('A');
+		dtc.setRutaPlantilla(RUTA_IMAGENES);
+		return dtc;
 	}
 
 	private Constancia generaDatosConstancia(Constancia constancia) {
@@ -85,7 +93,12 @@ public class ReportService {
 		constancia.setNombreDoRS("NOMBRE_DORS");
 		constancia.setNombreSolicitante("HERIBERTO FABIAN SANTIAGO");
 		constancia.setSelloSE("SELLO_SE");
+		constancia.setSelloTiempoSol("selloTiempoSoldajsdhaldhlakjhdl");
+		constancia.setSelloTiempoDictamen("SelloTiempoDictamen");
 		constancia.setSimilarDoRS("similar DORS");
+		constancia.setSelloTiempoAut("SelloTiempoAutASDADADADADS");
+		constancia.setSelloSP("SELLO_SP");
+		constancia.setSelloSol("sello_SOL");
 
 		constancia.setListaDatos(null);
 
@@ -103,6 +116,10 @@ public class ReportService {
 				String outputFile = fileName.replaceFirst("\\.\\w+$", ".jasper");
 
 				convertAndSave(resource, outputFile);
+				
+				if(fileName.equalsIgnoreCase("Constancia_Autorizacion_DoRS.jrxml")) {
+					generaReporte(resource);
+				}
 			}
 
 		} catch (IOException e) {

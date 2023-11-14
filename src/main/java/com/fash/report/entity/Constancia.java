@@ -36,6 +36,9 @@ public class Constancia implements Serializable {
 	private String tipoFirma;
 	private String firma;
 	
+	private String selloSP;
+	private String selloSol;
+	
 	//Para constancias de rechazo
 	private String motivoRechazo;
 
@@ -220,6 +223,22 @@ public class Constancia implements Serializable {
 
 	public void setFirma(String firma) {
 		this.firma = firma;
+	}
+
+	public String getSelloSP() {
+		return selloSP;
+	}
+
+	public void setSelloSP(String selloSP) {
+		this.selloSP = selloSP;
+	}
+
+	public String getSelloSol() {
+		return selloSol;
+	}
+
+	public void setSelloSol(String selloSol) {
+		this.selloSol = selloSol;
 	}
 
 }
